@@ -18,9 +18,16 @@
   },
   "homepage": "https://github.com/eunchong2lee/Airbnb_clone_project_crawling#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "csv-parse": "^4.16.3",
     "csv-stringify": "^6.1.3",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "lodash": "^4.17.21",
-    "puppeteer": "^14.4.1"
+    "mongoose": "^6.4.0",
+    "mongoose-sequence": "^5.3.1",
+    "puppeteer": "^14.4.1",
+    "puppeteer-for-crawling": "^0.0.2",
+    "url": "^0.11.0"
   }
 }
