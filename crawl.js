@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
 
 const crawler = async () => {
   try {
-    const csv = fs.readFileSync('./csv/data.csv');
+    const csv = fs.readFileSync('./csv/data1.csv');
     const records = parse(csv.toString('utf-8'));
 
     const result = [];
@@ -37,8 +37,8 @@ const crawler = async () => {
           let length = v.querySelector("[class='f15liw5s s1cjsi4j dir dir-ltr']").querySelector("[class]").textContent
           let star = v.querySelector("[class= 'ru0q88m dir dir-ltr']").textContent
           let title = v.querySelector("[itemprop='name']").content
-        
-          data.push({title, location, length, date, star, price, url});
+          let postId = url_sample.split("rooms/")[1].split("?")[0]
+          data.push({title, location, length, date, star, price, url,postId});
           urls.push([title, url]);
         })
       }
@@ -75,26 +75,27 @@ const crawlerdetails = async () =>{
     });
 
   // 새로운 페이지를 연다.
-    const page = await browser.newPage();
+    
   // 페이지의 크기를 설정한다.
 
-  for(const [i,r] of records2.entries()){
+  // for(const [i,r] of records2.entries()){
+    await Promise.all(records2.map(async (r,i)=>{
+    const page = await browser.newPage();
     // let urlString = 'https://www.airbnb.co.kr/rooms/34043729?category_tag=Tag%3A789&adults=1&children=0&infants=0&check_in=2022-05-21&check_out=2022-05-28&federated_search_id=3bfb4c81-6f76-4f3d-87ce-233f8af13b5f&source_impression_id=p3_1645359387_GgDVUVUH%2BJC%2BK6wC'
     // let r[1] = url.parse(urlString, true); // urlString을 객체 형태로 파싱
     await page.goto(r[1]);
 
     // 페이지 로딩이 되기까지 잠시 기다린다. 테스트 중인 기기의 사양이나 인터넷 속도, 웹서버의 속도 따라 경험적으로 테스트해야함.
-    await page.waitForTimeout(10000); 
+    await page.waitForTimeout(15000); 
     await page.evaluate('window.scrollTo(0, document.body.scrollHeight)') // 숙소 내부 페이지 최하단으로 이동
     await page.click("[class='_1ju7xj0j']")
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2000);
 
     for( let l = 0; l <=100; l++){
       await page.keyboard.press('Tab');
     }
 
-    await page.waitForTimeout(10000);
-    let url = r[1]
+    await page.waitForTimeout(3000);
     const [text] = await page.evaluate(()=>{
       let data = [];
       let image = [];
@@ -118,13 +119,17 @@ const crawlerdetails = async () =>{
       data.push({ image, hosting, information, money, description});
       return data;
     })
-    text.url = url;
+    let url = r[1]
+    let postId = url.split("rooms/")[1].split("?")[0]
+    text.postId = postId;
     console.log(text);
     result.push(text);
    
-    await page.waitForTimeout(3000);
-}
-  await page.close();
+    await page.waitForTimeout(1000);
+    await page.close();
+// }
+}))
+
   console.log(result);
   await browser.close();
   return result;
@@ -132,7 +137,7 @@ const crawlerdetails = async () =>{
 console.error(e);
 }
 }
-// crawlerdetails();
+crawlerdetails();
 
 
 const test_crawler = async () => {
@@ -156,7 +161,7 @@ const test_crawler = async () => {
       await page.keyboard.press('Tab');
     }
 
-    await page.waitForTimeout(10000);
+    await page.waitForTimeout(3000);
 
 
     const text = await page.evaluate(()=>{

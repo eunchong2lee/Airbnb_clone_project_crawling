@@ -10,7 +10,7 @@ postRouter.post('/posts', async (req, res)=>{
     console.log(data);
     for(let i = 1; i < data.length; i++){
       const newData = data[i];
-      const post = new Posts({title: newData.title, category, location: newData.location, url: newData.url, length: newData.length, date: newData.date, star: newData.star, price: newData.price,image : [],details :{}});
+      const post = new Posts({title: newData.title, category, location: newData.location, url: newData.url, length: newData.length, date: newData.date, star: newData.star, price: newData.price,image : [],details :{},postId : Number(newData.postId)});
       await post.save();
     }
     console.log(result);
@@ -18,7 +18,7 @@ postRouter.post('/posts', async (req, res)=>{
       const newResult = result[j]
       console.log(result.length);
       // console.log(newResult);
-      const newPosts = await Posts.findOneAndUpdate({url: newResult.url},{image: newResult.image, details: {hosting: newResult.hosting, information: newResult.information, description: newResult.description,money: newResult.money}})
+      const newPosts = await Posts.findOneAndUpdate({postId: newResult.postId},{image: newResult.image, details: {hosting: newResult.hosting, information: newResult.information, description: newResult.description,money: newResult.money}})
       console.log(newPosts);
     }
 
