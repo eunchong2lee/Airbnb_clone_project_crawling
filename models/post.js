@@ -4,6 +4,7 @@ const autoIncrement = require("mongoose-sequence")(mongoose);
 const postSchema = new mongoose.Schema({
     postId: {
         type: Number,
+        unique: true,
     },
     title: {
         type: String
@@ -41,9 +42,6 @@ const postSchema = new mongoose.Schema({
 },
 {
         timestamps: true
-});
-postSchema.plugin(autoIncrement, {
-    inc_field: "postId",
 });
 
 const Posts = mongoose.model('post', postSchema);

@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "crawl": "node crawl.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,8 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.4.0",
     "mongoose-sequence": "^5.3.1",
+    "node-cron": "^3.0.1",
+    "nodemon": "^2.0.16",
     "puppeteer": "^14.4.1",
     "puppeteer-for-crawling": "^0.0.2",
     "url": "^0.11.0"
