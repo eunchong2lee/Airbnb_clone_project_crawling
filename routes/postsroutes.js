@@ -6,21 +6,21 @@ const {Posts} = require('../models/post')
 const {crawler, crawlerdetails} = require('../crawl')
 
 postRouter.post('/posts', async (req, res)=>{
-    // const {result1, category} = await crawler();
+    const {result1, category} = await crawler();
     const result = await crawlerdetails();
-    // if(!result ){
-    //   return res.status(400).send({message:"실패"});
-    // }
-    // console.log(result1);
-    // console.log(category);
-    // console.log(result1.length);
-    // for(let i = 0; i < result1.length; i++){
-    //   const newData = result1[i];
-    //   const checkpost = await Posts.findOne({postId: newData.postId})
-    //   if(!checkpost){
-    //     const post = new Posts({score: newData.score,title: newData.title, category, location: newData.location, url: newData.url, length: newData.length, date: newData.date, star: newData.star, price: newData.price,image : [],details :{},postId : newData.postId});
-    //     await post.save();
-    //   }}
+    if(!result ){
+      return res.status(400).send({message:"실패"});
+    }
+    console.log(result1);
+    console.log(category);
+    console.log(result1.length);
+    for(let i = 0; i < result1.length; i++){
+      const newData = result1[i];
+      const checkpost = await Posts.findOne({postId: newData.postId})
+      if(!checkpost){
+        const post = new Posts({score: newData.score,title: newData.title, category, location: newData.location, url: newData.url, length: newData.length, date: newData.date, star: newData.star, price: newData.price,image : [],details :{},postId : newData.postId});
+        await post.save();
+      }}
     
 
     
