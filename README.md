@@ -7,4 +7,4 @@
 
 ## Airbnb_Clone_Project github URL
 * 에어비엔비 클론 프로젝트 메인 레파지토리입니다.
-https://github.com/eunchong2lee/Airbnb_clone_project
+* https://github.com/eunchong2lee/Airbnb_clone_project
