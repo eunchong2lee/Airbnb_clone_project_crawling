@@ -9,8 +9,8 @@ const mongoose = require("mongoose");
 
 const {postRouter} = require('./routes/postsroutes')
 
-// mongoose.connect("", { ignoreUndefined: true });
-mongoose.connect("mongodb://localhost:27017/Airbnb_test", { ignoreUndefined: true });
+mongoose.connect("mongodb+srv://lojy:drhKeiP2Nn4Nd3ad@cluster0.ojxiz.mongodb.net/Airbnb?retryWrites=true&w=majority", { ignoreUndefined: true });
+// mongoose.connect("mongodb://localhost:27017/Airbnb_test", { ignoreUndefined: true });
 
 app.use(express.json());
 app.use(cors());

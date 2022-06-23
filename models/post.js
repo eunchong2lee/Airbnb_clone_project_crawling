@@ -3,7 +3,7 @@ const autoIncrement = require("mongoose-sequence")(mongoose);
 
 const postSchema = new mongoose.Schema({
     postId: {
-        type: Number,
+        type: String,
         unique: true,
     },
     title: {
@@ -38,6 +38,9 @@ const postSchema = new mongoose.Schema({
         information: {type: String},
         money: {type: String},
         description: {type: String},
+    },
+    score : {
+        type : [String]
     }
 },
 {
